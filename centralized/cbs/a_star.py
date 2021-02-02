@@ -28,7 +28,11 @@ class AStar():
         step_cost = 1
         
         closed_set = set()
-        open_set = {initial_state}
+        try:
+            open_set = {initial_state}
+        except Exception as e:
+            print(e)
+
 
         came_from = {}
 
