@@ -19,7 +19,7 @@ class CBS(object):
         self.closed_set = set()
 
     def search(self):
-        print('start search at %s' % datetime.now())
+        print('%s cbs search start' % datetime.now())
         start = HighLevelNode()
         # TODO: Initialize it in a better way
         start.constraint_dict = {}
@@ -32,7 +32,10 @@ class CBS(object):
 
         self.open_set |= {start}
 
+        search_count = 1
         while self.open_set:
+            print('%s %sth search start' % (datetime.now(), search_count))
+            search_count += 1
             P = min(self.open_set)
             self.open_set -= {P}
             self.closed_set |= {P}
@@ -40,7 +43,7 @@ class CBS(object):
             self.env.constraint_dict = P.constraint_dict
             conflict_dict = self.env.get_first_conflict(P.solution)
             if not conflict_dict:
-                print("solution found at %s" % datetime.now())
+                print("%s solution found" % datetime.now())
                 return self.generate_plan(P.solution)
 
             constraint_dict = self.env.create_constraints_from_conflict(conflict_dict)

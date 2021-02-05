@@ -17,7 +17,5 @@ class State(object):
         return self.location == state.location
 
     def __str__(self):
-        try:
-            return str((self.time, self.location.x, self.location.y))
-        except Exception:
-            return str((self.time, self.location.name))
+        # return str((self.time, self.location.x, self.location.y))
+        return str((self.time, self.location.name))

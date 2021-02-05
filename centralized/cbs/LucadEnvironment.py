@@ -8,11 +8,24 @@ from Constraints import Constraints
 from math import fabs
 from itertools import combinations
 from decimal import Decimal
+from Dijkstra import Dijkstra
+import ast
 
 
 class LucadEnvironment(object):
     def __init__(self, graph, agents):
         self.graph = graph
+        self.min_cost_path_table = dict()
+        with open('min_cost_table', 'r') as f:
+            data = f.read()
+            if data != '':
+                self.min_cost_path_table = ast.literal_eval(data)
+        if len(self.min_cost_path_table.keys()) == 0:
+            dj = Dijkstra(graph)
+            dj.traverse()
+            self.min_cost_path_table = dj.paths
+            with open('min_cost_table', 'w') as f:
+                f.write(str(self.min_cost_path_table))
 
         self.agents = agents
         self.agent_dict = {}
@@ -45,6 +58,9 @@ class LucadEnvironment(object):
             if self.state_valid(n) and self.transition_valid(state, n):
                 neighbors.append(n)
         return neighbors
+
+    def cost(self, start, end):
+        return self.graph.cost(start, end)
 
     def get_first_conflict(self, solution):
         max_t = max([len(plan) for plan in solution.values()])
@@ -119,16 +135,25 @@ class LucadEnvironment(object):
         pass
 
     def admissible_heuristic(self, state, agent_name):
+        # goal = self.agent_dict[agent_name]['goal']
+        # points = self.graph.points
+        # try:
+        #     start_x = Decimal(points[str(state.location.name)].x)
+        #     start_y = Decimal(points[str(state.location.name)].y)
+        #     goal_x = Decimal(points[str(goal.location.name)].x)
+        #     goal_y = Decimal(points[str(goal.location.name)].y)
+        # except Exception as e:
+        #     print(e)
+        # return fabs(start_x - goal_x) + fabs(start_y - goal_y)
         goal = self.agent_dict[agent_name]['goal']
-        points = self.graph.points
-        try:
-            start_x = Decimal(points[str(state.location.name)].x)
-            start_y = Decimal(points[str(state.location.name)].y)
-            goal_x = Decimal(points[str(goal.location.name)].x)
-            goal_y = Decimal(points[str(goal.location.name)].y)
-        except Exception as e:
-            print(e)
-        return fabs(start_x - goal_x) + fabs(start_y - goal_y)
+        if state.is_equal_except_time(goal):
+            return 0
+        if state.location.name in self.min_cost_path_table.keys() and \
+            goal.location.name in self.min_cost_path_table[state.location.name].keys():
+            return self.min_cost_path_table[state.location.name][goal.location.name]['cost']
+        else:
+            print('some thing goes wrong')
+
 
     def is_at_goal(self, state, agent_name):
         goal_state = self.agent_dict[agent_name]['goal']

@@ -17,8 +17,9 @@ class LucadAnimation:
         self.combined_schedule = {}
         self.combined_schedule.update(self.schedule['schedule'])
 
-        self.fig = plt.figure()
+        self.fig = plt.figure(frameon=False)
         self.ax = self.fig.add_subplot(111, aspect='equal')
+        self.fig.subplots_adjust(left=0, right=1, bottom=0, top=1, wspace=None, hspace=None)
 
         self.agents = dict()
         self.agent_names = dict()
@@ -90,6 +91,7 @@ class LucadAnimation:
                     d1.set_facecolor('red')
                     d2.set_facecolor('red')
                     print("COLLISION! (agent-agent) ({}, {})".format(i, j))
+                    exit()
 
         return self.patches + self.artists
 
