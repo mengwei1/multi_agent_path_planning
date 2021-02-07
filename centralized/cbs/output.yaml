@@ -1,80 +1,42 @@
-cost: 38
+cost: 19
 schedule:
   agent0:
-  - position: '15'
+  - position: '7'
     t: 0
-  - position: '16'
+  - position: '6'
     t: 1
-  - position: '14'
+  - position: '5'
     t: 2
-  - position: '113'
-    t: 3
-  - position: '26'
-    t: 4
-  - position: '120'
-    t: 5
-  - position: '121'
-    t: 6
-  - position: '122'
-    t: 7
-  - position: '123'
-    t: 8
-  - position: '174'
-    t: 9
-  - position: '172'
-    t: 10
-  - position: '170'
-    t: 11
-  - position: '70'
-    t: 12
-  - position: '75'
-    t: 13
-  - position: '67'
-    t: 14
-  - position: '45'
-    t: 15
-  - position: '29'
-    t: 16
-  - position: '28'
-    t: 17
-  agent1:
   - position: '2'
-    t: 0
-  - position: '3'
-    t: 1
-  - position: '1'
-    t: 2
-  - position: '115'
     t: 3
-  - position: '113'
+  - position: '1'
     t: 4
-  - position: '26'
+  - position: '3'
     t: 5
-  - position: '120'
+  - position: '4'
     t: 6
-  - position: '121'
+  - position: '8'
     t: 7
-  - position: '122'
+  - position: '9'
     t: 8
-  - position: '123'
+  agent1:
+  - position: '13'
+    t: 0
+  - position: '12'
+    t: 1
+  - position: '12'
+    t: 2
+  - position: '5'
+    t: 3
+  - position: '2'
+    t: 4
+  - position: '1'
+    t: 5
+  - position: '3'
+    t: 6
+  - position: '4'
+    t: 7
+  - position: '10'
+    t: 8
+  - position: '11'
     t: 9
-  - position: '174'
-    t: 10
-  - position: '172'
-    t: 11
-  - position: '170'
-    t: 12
-  - position: '70'
-    t: 13
-  - position: '75'
-    t: 14
-  - position: '67'
-    t: 15
-  - position: '45'
-    t: 16
-  - position: '53'
-    t: 17
-  - position: '31'
-    t: 18
-  - position: '30'
-    t: 19

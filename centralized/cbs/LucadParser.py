@@ -1,7 +1,7 @@
 from xml.dom.minidom import parse
 import xml.dom.minidom
-from .LucadPoint import Point
-from .LucadPath import Path
+from LucadPoint import Point
+from LucadPath import Path
 
 
 def parse_lucad_(file_name):
@@ -57,8 +57,11 @@ def parse_lucad(file_name):
 
     for path in paths:
         name = path.getAttribute('name')
-        if int(name) > 10000:
-            continue
+        try:
+            if int(name) > 10000:
+                continue
+        except ValueError as e:
+            pass
         start = path.getAttribute('sourcePoint')
         end = path.getAttribute('destinationPoint')
         length = path.getAttribute('routingCost')

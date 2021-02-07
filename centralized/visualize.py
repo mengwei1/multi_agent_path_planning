@@ -31,7 +31,6 @@ def main_origin():
 
 def main_lucad():
     parser = argparse.ArgumentParser()
-    parser.add_argument("map", help="input file containing map")
     parser.add_argument("agents", help="input file containing agent initial position and goal position")
     parser.add_argument("schedule", help="schedule for agents")
     parser.add_argument('--video', dest='video', default=None,
@@ -39,10 +38,12 @@ def main_lucad():
     parser.add_argument("--speed", type=int, default=1, help="speedup-factor")
     args = parser.parse_args()
 
-    points, edges = parse_lucad(args.map)
-
     with open(args.agents) as agents_file:
-        agents = yaml.load(agents_file, Loader=yaml.FullLoader)
+        param = yaml.load(agents_file, Loader=yaml.FullLoader)
+
+    map_file_name = param["map"]["file_name"]
+    points, edges = parse_lucad(map_file_name)
+    agents = param
 
     with open(args.schedule) as states_file:
         schedule = yaml.load(states_file, Loader=yaml.FullLoader)

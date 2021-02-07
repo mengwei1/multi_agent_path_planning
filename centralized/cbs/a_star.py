@@ -31,7 +31,7 @@ class AStar():
         print('%s searching path for %s from %s to %s' % (datetime.now(), agent_name, self.agent_dict[agent_name]["start"], self.agent_dict[agent_name]["goal"]))
         initial_state = self.agent_dict[agent_name]["start"]
         step_cost = 1
-        print('initial state is %s' % initial_state)
+        # print('initial state is %s' % initial_state)
         
         closed_set = set()
         open_set = {initial_state}
@@ -49,7 +49,7 @@ class AStar():
             temp_dict = {open_item: f_score.setdefault(open_item, float("inf")) for open_item in open_set}
             # print('temp dict is %s' % temp_dict)
             current = min(temp_dict, key=temp_dict.get)
-            print('astar current is %s' % current)
+            # print('astar current is %s' % current)
 
             if self.is_at_goal(current, agent_name):
                 print('%s path found for %s' % (datetime.now(), agent_name))

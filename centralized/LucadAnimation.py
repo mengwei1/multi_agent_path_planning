@@ -1,4 +1,5 @@
 import matplotlib
+import pickle
 from matplotlib.patches import Circle, Rectangle
 import matplotlib.pyplot as plt
 import numpy as np
@@ -52,7 +53,7 @@ class LucadAnimation:
         self.anim = animation.FuncAnimation(self.fig, self.animate,
                                             init_func=self.init_func,
                                             frames=int(self.T + 1) * 10,
-                                            interval=500,
+                                            interval=10,
                                             blit=True)
 
     def init_func(self):
@@ -64,18 +65,11 @@ class LucadAnimation:
         return self.patches + self.artists
 
     def animate(self, i):
-        print('%sth animation' % i)
-        if i == 41:
-            print('total frames is %s' % self.T)
         for agent_name, agent in self.combined_schedule.items():
-            print('agent name is %s' % agent_name)
             pos = self.get_state(i / 10, agent)
-            print('pos is %s, %s' % (pos[0], pos[1]))
             p = (pos[0], pos[1])
-            print('setting agent center')
             self.agents[agent_name].center = p
             self.agent_names[agent_name].set_position(p)
-            print('agent center set')
 
         for _, agent in self.agents.items():
             agent.set_facecolor(agent.original_face_color)
@@ -92,7 +86,6 @@ class LucadAnimation:
                     d2.set_facecolor('red')
                     print("COLLISION! (agent-agent) ({}, {})".format(i, j))
                     exit()
-
         return self.patches + self.artists
 
     def get_state(self, t, d):
@@ -100,14 +93,12 @@ class LucadAnimation:
         while idx < len(d) and d[idx]["t"] < t:
             idx += 1
         if idx == 0:
-            print(d)
-            print(type(d))
             return np.array([float(self.points[d[0]['position']].x), float(self.points[d[0]['position']].y)])
         elif idx < len(d):
             posLast = np.array([float(self.points[d[idx - 1]['position']].x), float(self.points[d[idx - 1]['position']].y)])
             posNext = np.array([float(self.points[d[idx]['position']].x), float(self.points[d[idx]['position']].y)])
         else:
-            return np.array([self.points[d[-1]['position']].x, self.points[d[-1]['position']].y])
+            return np.array([float(self.points[d[-1]['position']].x), float(self.points[d[-1]['position']].y)])
         dt = d[idx]["t"] - d[idx - 1]["t"]
         t = (t - d[idx - 1]["t"]) / dt
         pos = (posNext - posLast) * t + posLast
