@@ -1,4 +1,4 @@
-cost: 19
+cost: 27
 schedule:
   agent0:
   - position: '7'
@@ -7,18 +7,22 @@ schedule:
     t: 1
   - position: '5'
     t: 2
-  - position: '2'
+  - position: '6'
     t: 3
-  - position: '1'
+  - position: '5'
     t: 4
-  - position: '3'
+  - position: '2'
     t: 5
-  - position: '4'
+  - position: '1'
     t: 6
-  - position: '8'
+  - position: '3'
     t: 7
-  - position: '9'
+  - position: '4'
     t: 8
+  - position: '8'
+    t: 9
+  - position: '9'
+    t: 10
   agent1:
   - position: '13'
     t: 0
@@ -40,3 +44,16 @@ schedule:
     t: 8
   - position: '11'
     t: 9
+  agent2:
+  - position: '16'
+    t: 0
+  - position: '15'
+    t: 1
+  - position: '14'
+    t: 2
+  - position: '2'
+    t: 3
+  - position: '17'
+    t: 4
+  - position: '18'
+    t: 5

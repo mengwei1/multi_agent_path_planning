@@ -78,7 +78,3 @@ def parse_lucad(file_name):
                 exit()
             print('\t%s with cost %s' % (path.end, path.length))
     return result_points, result_edges
-
-
-if __name__ == '__main__':
-    parse_lucad("huahai.xml")

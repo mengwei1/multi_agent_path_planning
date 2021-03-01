@@ -53,6 +53,7 @@ class Dijkstra():
 
             if current == end:
                 self.paths[start].update(self.reconstruct_path(end, came_from))
+                break
 
             neighbors = [neighbor.end for neighbor in self.graph.neighbors(current)]
             for neighbor in neighbors:
@@ -80,12 +81,3 @@ class Dijkstra():
         result[end]['cost'] = cost
         result[end]['path'] = path
         return result
-
-from LucadParser import parse_lucad
-from LucadGraph import LucadGraph
-if __name__ == '__main__':
-    points, edges = parse_lucad('huahai.xml')
-    graph = LucadGraph(points, edges)
-    dj = Dijkstra(graph)
-    dj.traverse()
-    print(dj.paths)

@@ -53,7 +53,7 @@ class LucadAnimation:
         self.anim = animation.FuncAnimation(self.fig, self.animate,
                                             init_func=self.init_func,
                                             frames=int(self.T + 1) * 10,
-                                            interval=10,
+                                            interval=200,
                                             blit=True)
 
     def init_func(self):

@@ -135,16 +135,6 @@ class LucadEnvironment(object):
         pass
 
     def admissible_heuristic(self, state, agent_name):
-        # goal = self.agent_dict[agent_name]['goal']
-        # points = self.graph.points
-        # try:
-        #     start_x = Decimal(points[str(state.location.name)].x)
-        #     start_y = Decimal(points[str(state.location.name)].y)
-        #     goal_x = Decimal(points[str(goal.location.name)].x)
-        #     goal_y = Decimal(points[str(goal.location.name)].y)
-        # except Exception as e:
-        #     print(e)
-        # return fabs(start_x - goal_x) + fabs(start_y - goal_y)
         goal = self.agent_dict[agent_name]['goal']
         if state.is_equal_except_time(goal):
             return 0
@@ -153,7 +143,6 @@ class LucadEnvironment(object):
             return self.min_cost_path_table[state.location.name][goal.location.name]['cost']
         else:
             print('some thing goes wrong')
-
 
     def is_at_goal(self, state, agent_name):
         goal_state = self.agent_dict[agent_name]['goal']
